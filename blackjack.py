@@ -46,9 +46,37 @@ for _ in range(2):
 
 while playerIn or dealerIn:
     print(f"Dealer had an {revealDealerHand()} and X")
-    print(f"You have {playerHand()} for a total of {total(playerHand)}.")
+    print(f"You have {playerHand} for a total of {total(playerHand)}.")
     if playerIn:
         stayOrHit = input("1: Stay\n2: Hit\n")
     if total(dealerHand) > 16:
         dealerIn = False
+    else:
+        dealCard(dealerHand)
+    if stayOrHit == "1":
+        playerIn = False
+    else:
+        dealCard(playerHand)
+    if total(playerHand) >= 21:
+        break
+    elif total(dealerHand) >= 21:
+        break
 
+if total(playerHand) == 21:
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("Blackjack! You win!")
+elif total(dealerHand) == 21:
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("Blackjack! Dealer wins!")
+if total(playerHand) > 21:
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("You bust! Dealer wins!")
+elif total(dealerHand) > 21:
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("Dealer busts! You win")
+elif 21 - total(dealerHand) < 21 - total(playerHand):
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("Dealer wins!")
+elif 21 - total(dealerHand) > 21 - total(playerHand):
+    print(f"\nYou have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
+    print("You win!")
